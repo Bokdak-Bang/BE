@@ -18,6 +18,8 @@ public enum ErrorStatus implements BaseErrorCode {
 
     //Member 관련 에러
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER_001", "사용자를 찾을 수 없습니다."),
+    INVALID_ROLE(HttpStatus.FORBIDDEN,"ENUM_001","유효하지 않은 Role입니다."),
+
 
     //OAuth 관련 에러
     INVALID_OAuth(HttpStatus.NOT_FOUND, "OAUTH_001", "소셜로그인을 하는데 문제가 발생하였습니다."),
