@@ -43,10 +43,6 @@ public class MemberEntity {
         return new MemberEntity(id, nickname, email, password, profileImg, age, city, socialId, refreshToken, socialType, role);
     }
 
-//    public void passwordEncode(PasswordEncoder passwordEncoder) {
-//        this.password = passwordEncoder.encode(this.password);
-//    }
-
     public void updateRefreshToken(String updateRefreshToken) {
         this.refreshToken = updateRefreshToken;
     }
