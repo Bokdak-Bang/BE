@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import seoul.gonggong.domain.user.exception.OAuthException;
 import java.util.Arrays;
-import static seoul.gonggong.global.error.status.ErrorStatus.INVALID_OAuth;
+
+import static seoul.gonggong.global.error.status.ErrorStatus.INVALID_OAUTH;
 
 @RequiredArgsConstructor
 @Getter
@@ -16,6 +17,6 @@ public enum SocialType {
         return Arrays.stream(values())
                 .filter(social -> social.socialType.equals(socialType))
                 .findFirst()
-                .orElseThrow(() -> new OAuthException(INVALID_OAuth));
+                .orElseThrow(() -> new OAuthException(INVALID_OAUTH));
     }
 }

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import seoul.gonggong.appllication.user.service.dto.request.UserSignUpRequest;
 import seoul.gonggong.domain.user.User;
-import seoul.gonggong.domain.user.service.MemberAppender;
 import seoul.gonggong.domain.user.service.UserAppender;
 import seoul.gonggong.domain.user.service.UserReader;
 
@@ -22,7 +21,7 @@ public class UserService {
 //        memberReader.readByNickName(memberSignUpRequest.nickname());
 
         User user = userSignUpRequest.toDomain();
-        userAppender.createMember(user);
+        userAppender.createUser(user);
     }
 
 

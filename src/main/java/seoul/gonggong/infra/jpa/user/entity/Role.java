@@ -6,7 +6,6 @@ import seoul.gonggong.domain.user.exception.RoleException;
 
 import java.util.Arrays;
 
-import static seoul.gonggong.global.error.status.ErrorStatus.INVALID_OAuth;
 import static seoul.gonggong.global.error.status.ErrorStatus.INVALID_ROLE;
 
 @RequiredArgsConstructor
