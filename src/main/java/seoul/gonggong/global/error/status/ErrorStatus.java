@@ -22,7 +22,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
 
     //OAuth 관련 에러
-    INVALID_OAuth(HttpStatus.NOT_FOUND, "OAUTH_001", "소셜로그인을 하는데 문제가 발생하였습니다."),
+    INVALID_OAUTH(HttpStatus.UNAUTHORIZED, "OAUTH_001", "소셜 로그인을 하는데 문제가 발생하였습니다."),
 
     //Body 에러
     INVALID_BODY(HttpStatus.BAD_REQUEST, "BODY_ERROR", "Body가 올바르지 않습니다.");
