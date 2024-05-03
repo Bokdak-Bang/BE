@@ -1,4 +1,4 @@
-package seoul.gonggong.domain.user.domain;
+package seoul.gonggong.domain.member.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
