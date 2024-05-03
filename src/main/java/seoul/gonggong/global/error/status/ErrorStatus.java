@@ -17,12 +17,20 @@ public enum ErrorStatus implements BaseErrorCode {
     _FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON_403", "금지된 요청 입니다."),
 
     //User 관련 에러
-    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_001", "사용자를 찾을 수 없습니다."),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER_001", "사용자를 찾을 수 없습니다."),
+    MEMBER_IS_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "MEMBER_002", "동일한 이메일을 가지고 있는 사용자가 존재합니다."),
+    PASSWORD_IS_INVALID(HttpStatus.BAD_REQUEST,"MEMBER_003","비밀번호가 일치하지 않습니다."),
     INVALID_ROLE(HttpStatus.FORBIDDEN,"ENUM_001","유효하지 않은 Role입니다."),
 
+    //JWT 관련 에러
+    JWT_TOKEN_IS_WRONG(HttpStatus.BAD_REQUEST,"JWT_001","JWT 토큰이 잘못되었습니다."),
+    TOKEN_IS_EXPIRED(HttpStatus.BAD_REQUEST,"JWT_002","잘못된 JWT 서명입니다."),
+    EXPIRED_JWT(HttpStatus.BAD_REQUEST,"JWT_003","만료된 JWT 토큰입니다."),
+    UNSUPPORTED_JWT(HttpStatus.BAD_REQUEST, "JWt_004", "지원되지 않은 JWT 토큰입니다."),
+    UNAUTHORIZED_TOKEN(HttpStatus.UNAUTHORIZED, "JWT_005", "권한 정보가 없는 토큰 입니다."),
 
-    //OAuth 관련 에러
-    INVALID_OAUTH(HttpStatus.UNAUTHORIZED, "OAUTH_001", "소셜 로그인을 하는데 문제가 발생하였습니다."),
+    //Auth 관련 에러
+    NO_AUTHENTICATION_INFO(HttpStatus.NOT_FOUND, "AUTH_001", "Security Context 에 인증 정보가 없습니다.."),
 
     //Body 에러
     INVALID_BODY(HttpStatus.BAD_REQUEST, "BODY_ERROR", "Body가 올바르지 않습니다.");
