@@ -17,7 +17,7 @@ public class CorsConfig {
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
 
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration);
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/api/**", configuration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
 }
