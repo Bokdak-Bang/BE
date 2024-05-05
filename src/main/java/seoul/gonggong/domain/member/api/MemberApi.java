@@ -13,7 +13,12 @@ import seoul.gonggong.global.utils.SecurityUtil;
 @RequestMapping("/member")
 public class MemberApi {
     private final MemberService memberService;
-    @GetMapping("")
+
+    @GetMapping
+    public ApiResponse<MemberResponse> findMemberInfoById() {
+        return ApiResponse.onSuccess(memberService.findMemberInfoById(SecurityUtil.getCurrentMemberId()));
+    }
+    @GetMapping("/my-page")
     public ApiResponse<MemberResponse> getMyPage() {
         return ApiResponse.onSuccess(memberService.findMemberWithId(SecurityUtil.getCurrentMemberId()));
     }

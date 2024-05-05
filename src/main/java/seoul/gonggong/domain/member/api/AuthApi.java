@@ -14,21 +14,19 @@ import seoul.gonggong.global.utils.SecurityUtil;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 public class AuthApi {
     private final MemberService memberService;
-    @PostMapping("/auth/sign")
+    @PostMapping("/sign/members")
     public ApiResponse<String> signMember(@Valid @RequestBody JoinRequest joinRequest) {
         memberService.signMember(joinRequest);
         return ApiResponse.onSuccess("회원가입이 완료되었습니다.");
     }
 
-    @PostMapping("/auth/login")
+    @PostMapping("/login/members")
     public ApiResponse<LoginResponse> loginMember(@Valid @RequestBody LoginRequest loginRequest) {
         return ApiResponse.onSuccess(memberService.login(loginRequest));
     }
 
-    @GetMapping("/mypage")
-    public ApiResponse<MemberResponse> findMemberInfoById() {
-        return ApiResponse.onSuccess(memberService.findMemberInfoById(SecurityUtil.getCurrentMemberId()));
-    }
+
 }
