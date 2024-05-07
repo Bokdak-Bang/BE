@@ -21,6 +21,8 @@ public class Security {
     private Integer fire;
     private Integer cctv;
 
+    private Double totalScore;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
     private Area area;

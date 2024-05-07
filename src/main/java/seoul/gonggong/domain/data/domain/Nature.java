@@ -18,8 +18,11 @@ public class Nature {
     private Double pm10Mean;
     private Double greenSum;
 
+    private Double totalScore;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
     private Area area;
+
 }
 

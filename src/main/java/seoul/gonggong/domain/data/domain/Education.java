@@ -18,6 +18,8 @@ public class Education {
     private Integer middleSchool;
     private Integer highSchool;
 
+    private Double totalScore;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
     private Area area;

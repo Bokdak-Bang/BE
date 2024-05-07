@@ -18,6 +18,8 @@ public class Residence {
     private Double landArea;
     private Double expansionRate;
 
+    private Double totalScore;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
     private Area area;

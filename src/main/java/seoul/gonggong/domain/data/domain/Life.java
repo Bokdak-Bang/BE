@@ -17,6 +17,8 @@ public class Life {
     private Integer busStationNumber;
     private Integer subwayStationNumber;
 
+    private Double totalScore;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
     private Area area;
