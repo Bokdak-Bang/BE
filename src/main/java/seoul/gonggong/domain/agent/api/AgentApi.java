@@ -20,7 +20,7 @@ import seoul.gonggong.global.ApiResponse;
 public class AgentApi {
     private final AgentService agentService;
 
-    @PostMapping("/sign/agent")
+    @PostMapping("/sign/agents")
     public ApiResponse<String> signMember(@Valid @RequestBody JoinAgentRequest joinAgentRequest) {
 
         agentService.signAgent(joinAgentRequest);
