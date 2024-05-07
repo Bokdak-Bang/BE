@@ -6,7 +6,8 @@ import seoul.gonggong.global.error.exception.InvalidValueException;
 
 import java.util.Arrays;
 
-import static seoul.gonggong.global.error.status.ErrorStatus.INVALID_REIGON;
+import static seoul.gonggong.global.error.status.ErrorStatus.INVALID_REGION;
+
 
 @RequiredArgsConstructor
 @Getter
@@ -20,7 +21,7 @@ public enum Region {
         return Arrays.stream(values())
                 .filter(role -> role.area.equals(area))
                 .findFirst()
-                .orElseThrow(() -> new InvalidValueException(INVALID_REIGON));
+                .orElseThrow(() -> new InvalidValueException(INVALID_REGION));
     }
 }
 

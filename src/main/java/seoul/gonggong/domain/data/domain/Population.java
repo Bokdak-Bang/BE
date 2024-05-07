@@ -14,7 +14,7 @@ public class Population {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double onePersonHouseHoleRate;
+    private Double onePersonHouseWholeRate;
     private Double youthPeople;
     private Double productivePeople;
     private Double oldPeople;

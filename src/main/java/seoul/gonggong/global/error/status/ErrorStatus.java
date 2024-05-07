@@ -20,7 +20,7 @@ public enum ErrorStatus implements BaseErrorCode {
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER_001", "사용자를 찾을 수 없습니다."),
     MEMBER_IS_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "MEMBER_002", "동일한 이메일을 가지고 있는 사용자가 존재합니다."),
     PASSWORD_IS_INVALID(HttpStatus.BAD_REQUEST,"MEMBER_003","비밀번호가 일치하지 않습니다."),
-    INVALID_REIGON(HttpStatus.FORBIDDEN,"ENUM_001","유효하지 않은 Region입니다."),
+    INVALID_REGION(HttpStatus.FORBIDDEN,"ENUM_001","유효하지 않은 Region입니다."),
 
     //JWT 관련 에러
     JWT_TOKEN_IS_WRONG(HttpStatus.BAD_REQUEST,"JWT_001","JWT 토큰이 잘못되었습니다."),
