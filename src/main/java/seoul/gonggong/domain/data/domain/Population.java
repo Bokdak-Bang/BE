@@ -18,6 +18,11 @@ public class Population {
     private Double youthPeople;
     private Double productivePeople;
     private Double oldPeople;
+    private Double onePersonHouseWholeRateMean;
+    private Double youthPeopleMean;
+    private Double productivePeopleMean;
+    private Double oldPeopleMean;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")

@@ -14,9 +14,12 @@ public class Nature {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double co2Mean;
+    private Double coMean;
     private Double pm10Mean;
     private Double greenSum;
+    private Double coMeanMean;
+    private Double pm10MeanMean;
+    private Double greenSumMean;
 
     private Double totalScore;
 

@@ -20,6 +20,12 @@ public class Security {
     private Integer suicide;
     private Integer fire;
     private Integer cctv;
+    private Integer accidentMean;
+    private Integer criminalMean;
+    private Integer lifeSecurityMean;
+    private Integer suicideMean;
+    private Integer fireMean;
+    private Integer cctvMean;
 
     private Double totalScore;
 

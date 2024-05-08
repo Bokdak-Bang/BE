@@ -16,6 +16,8 @@ public class WelfareCulture {
 
     private Integer cultureFacility;
     private Integer gymFacility;
+    private Double cultureFacilityMean;
+    private Double gymFacilityMean;
 
     private Double totalScore;
 

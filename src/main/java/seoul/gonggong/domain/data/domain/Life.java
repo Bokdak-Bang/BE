@@ -16,6 +16,8 @@ public class Life {
 
     private Integer busStationNumber;
     private Integer subwayStationNumber;
+    private Double busStationNumberMean;
+    private Double subwayStationNumberMean;
 
     private Double totalScore;
 

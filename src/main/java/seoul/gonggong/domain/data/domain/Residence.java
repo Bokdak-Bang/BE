@@ -17,6 +17,9 @@ public class Residence {
     private Integer landPrice;
     private Double landArea;
     private Double expansionRate;
+    private Double landPriceMean;
+    private Double landAreaMean;
+    private Double expansionRateMean;
 
     private Double totalScore;
 

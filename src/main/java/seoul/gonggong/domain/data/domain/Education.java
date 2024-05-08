@@ -17,6 +17,9 @@ public class Education {
     private Integer elementarySchool;
     private Integer middleSchool;
     private Integer highSchool;
+    private Double elementarySchoolMean;
+    private Double middleSchoolMean;
+    private Double highSchoolMean;
 
     private Double totalScore;
 
