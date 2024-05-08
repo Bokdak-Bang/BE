@@ -43,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserDetails createUserDetails(MemberEntity member) {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getAuthority().toString());
         return new User(
-            String.valueOf(member.getEmail()),
+            String.valueOf(member.getId()),
             member.getPassword(),
             Collections.singleton(grantedAuthority)
         );
@@ -51,7 +51,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserDetails createAgentDetails(AgentEntity agent) {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(agent.getAuthority().toString());
         return new User(
-                String.valueOf(agent.getEmail()),
+                String.valueOf(agent.getId()),
                 agent.getPassword(),
                 Collections.singleton(grantedAuthority)
         );
