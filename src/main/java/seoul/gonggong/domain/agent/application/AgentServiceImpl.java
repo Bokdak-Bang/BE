@@ -50,8 +50,8 @@ public class AgentServiceImpl implements AgentService{
                 .getId();
 
         UsernamePasswordAuthenticationToken authenticationToken = loginRequest.toAuthentication();
-        System.out.println("authenticationToken = " + authenticationToken.getAuthorities());
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
         System.out.println("authentication = " + authentication);
         TokenDto tokenDto = jwtTokenProvider.generateTokenDto(authentication);
 
