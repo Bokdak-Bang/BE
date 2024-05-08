@@ -3,7 +3,6 @@ package seoul.gonggong.domain.member.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import seoul.gonggong.global.BaseEntity;
 
 @Entity
 @Table(name = "members")
@@ -11,7 +10,7 @@ import seoul.gonggong.global.BaseEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class MemberEntity extends BaseEntity {
+public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,11 +27,11 @@ public class MemberEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    public static MemberEntity of(Long id, String email, String username, String password,Authority authority) {
+    public static MemberEntity of(Long id, String email, String username, String password, Authority authority) {
         return new MemberEntity(id, email, username, password, authority);
     }
 
-    public void encodePassword(PasswordEncoder passwordEncoder){
+    public void encodePassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(password);
     }
 

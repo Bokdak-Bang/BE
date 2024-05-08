@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import seoul.gonggong.domain.member.domain.Authority;
-import seoul.gonggong.global.BaseEntity;
 
 @Entity
 @Table(name = "agents")
@@ -12,7 +11,7 @@ import seoul.gonggong.global.BaseEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class AgentEntity extends BaseEntity {
+public class AgentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
