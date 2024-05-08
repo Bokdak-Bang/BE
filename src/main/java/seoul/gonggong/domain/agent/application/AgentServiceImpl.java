@@ -45,9 +45,9 @@ public class AgentServiceImpl implements AgentService{
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        Long id = agentJpaRepository.findByEmail(loginRequest.email())
-                .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND))
-                .getId();
+        AgentEntity agentEntity = agentJpaRepository.findByEmail(loginRequest.email())
+                .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+        Long id = agentEntity.getId();
 
         UsernamePasswordAuthenticationToken authenticationToken = loginRequest.toAuthentication();
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
@@ -64,7 +64,7 @@ public class AgentServiceImpl implements AgentService{
 //        refreshTokenRepository.save(refreshToken);
 
         // 5. 토큰 발급
-        return LoginResponse.of(tokenDto, id);
+        return LoginResponse.of(agentEntity.getNickname(),tokenDto, id);
 
     }
 

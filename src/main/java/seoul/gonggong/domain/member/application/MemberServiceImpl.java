@@ -47,9 +47,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        Long id = memberJpaRepository.findByEmail(loginRequest.email())
-                .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND))
-                .getId();
+        MemberEntity memberEntity = memberJpaRepository.findByEmail(loginRequest.email())
+                .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+        Long id = memberEntity.getId();
         UsernamePasswordAuthenticationToken authenticationToken = loginRequest.toAuthentication();
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         TokenDto tokenDto = jwtTokenProvider.generateTokenDto(authentication);
@@ -63,7 +63,7 @@ public class MemberServiceImpl implements MemberService {
 //        refreshTokenRepository.save(refreshToken);
 
         // 5. 토큰 발급
-        return LoginResponse.of(tokenDto, id);
+        return LoginResponse.of(memberEntity.getNickname(), tokenDto, id);
     }
 
     @Override

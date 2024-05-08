@@ -21,12 +21,12 @@ public class DataApi {
         return ApiResponse.onSuccess(dataService.getAreaListByInputScore(areaStandardRequest));
     }
 
-    @GetMapping("/{areaId}/board")
+    @GetMapping("/{areaId}/boards")
     public ApiResponse<AreaBoardListResponse> getBoardOfArea(@PathVariable Long areaId) {
         return ApiResponse.onSuccess(dataService.getBoardOfArea(areaId));
     }
 
-    @PostMapping("/{areaId}/board")
+    @PostMapping("/{areaId}/boards")
     public ApiResponse<?> saveBoardOfArea(@PathVariable Long areaId) {
         dataService.saveBoardOfArea(SecurityUtil.getCurrentMemberId(), areaId);
         return ApiResponse.onSuccess("성공적으로 저장되었습니다.");
