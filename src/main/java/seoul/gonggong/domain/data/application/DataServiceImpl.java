@@ -1,18 +1,19 @@
 package seoul.gonggong.domain.data.application;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import seoul.gonggong.domain.data.domain.Area;
-import seoul.gonggong.domain.data.domain.Education;
+import seoul.gonggong.domain.data.domain.MemberAreaEntity;
 import seoul.gonggong.domain.data.dto.request.AreaStandardRequest;
 import seoul.gonggong.domain.data.dto.response.*;
 import seoul.gonggong.domain.data.repository.*;
-import seoul.gonggong.domain.data.utils.CalculateUtils;
 import seoul.gonggong.domain.data.utils.MeanUtils;
 import seoul.gonggong.domain.data.utils.ScoreUtils;
 import seoul.gonggong.domain.exception.DataException;
+import seoul.gonggong.domain.member.domain.MemberEntity;
+import seoul.gonggong.domain.member.exception.MemberNotFoundException;
+import seoul.gonggong.domain.member.repository.MemberJpaRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,12 +22,13 @@ import static seoul.gonggong.global.error.status.ErrorStatus.*;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 @Transactional
 public class DataServiceImpl implements DataService {
     private final AreaJpaRepository areaJpaRepository;
+    private final MemberAreaJpaRepository memberAreaJpaRepository;
+    private final MemberJpaRepository memberJpaRepository;
+
     private final ScoreUtils scoreUtils;
-    private final CalculateUtils calculateUtils;
     private final MeanUtils meanUtils;
 
 
@@ -71,5 +73,16 @@ public class DataServiceImpl implements DataService {
         );
     }
 
+    @Override
+    public void saveBoardOfArea(Long memberId, Long areaId) {
+        MemberEntity memberEntity = memberJpaRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+
+        Area area = areaJpaRepository.findById(areaId)
+                .orElseThrow(() -> new DataException(DATA_NOT_FOUND));
+
+        MemberAreaEntity memberArea = MemberAreaEntity.of(null, memberEntity, area);
+        memberAreaJpaRepository.save(memberArea);
+    }
 }
 

@@ -8,4 +8,6 @@ public interface DataService {
     AreaScoreListResponse getAreaListByInputScore(AreaStandardRequest areaStandardRequest);
 
     AreaBoardListResponse getBoardOfArea(Long areaId);
+
+    void saveBoardOfArea(Long memberId, Long areaId);
 }

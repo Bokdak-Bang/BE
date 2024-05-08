@@ -23,7 +23,7 @@ public class MemberApi {
         return ApiResponse.onSuccess(memberService.findMemberWithId(SecurityUtil.getCurrentMemberId()));
     }
 
-    @PatchMapping
+    @PatchMapping("/my-page")
     public ApiResponse<MemberResponse> updateMyPage(@RequestBody MemberRequest memberRequest) {
         return ApiResponse.onSuccess(memberService.updateMember(memberRequest, SecurityUtil.getCurrentMemberId()));
     }
