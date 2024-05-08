@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 
 public class HealthCheckApi {
-    @GetMapping("/health-check")
+    @GetMapping("/")
     public String hello() {
         return "Hello!";
     }
