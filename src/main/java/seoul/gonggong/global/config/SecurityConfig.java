@@ -50,7 +50,11 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 정책 설정: STATELESS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**","/","/health-check").permitAll() // 인증 API는 전체 허용
+                        .requestMatchers("/auth/**",
+                                "/",
+                                "/health-check",
+                                "/data/areas",
+                                "/data/areas/{areaId}/boards").permitAll() // 인증 API는 전체 허용
                         .anyRequest().authenticated()) // 그 외 요청은 인증 필요
                 .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
 
