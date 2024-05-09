@@ -16,11 +16,13 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://bokdakbang.store"));
         configuration.addAllowedHeader("*");
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
 
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("**", configuration);
+
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
 
