@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import seoul.gonggong.domain.agent.domain.AgentEntity;
+import seoul.gonggong.domain.agent.repository.AgentJpaRepository;
 import seoul.gonggong.domain.member.domain.MemberEntity;
 import seoul.gonggong.domain.member.dto.request.JoinRequest;
 import seoul.gonggong.domain.member.dto.request.LoginRequest;
@@ -26,6 +28,7 @@ import static seoul.gonggong.global.error.status.ErrorStatus.*;
 @Transactional
 public class MemberServiceImpl implements MemberService {
     private final MemberJpaRepository memberJpaRepository;
+    private final AgentJpaRepository agentJpaRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider jwtTokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -38,18 +41,39 @@ public class MemberServiceImpl implements MemberService {
         if (!joinRequest.password().equals(joinRequest.checkPassword())) {
             throw new PasswordInvalidException(PASSWORD_IS_INVALID);
         }
+        agentJpaRepository.findByEmail(joinRequest.email())
+                .ifPresent(s -> {
+                    throw new MemberIsExistedException(EMAIL_IS_EXIST);
+                });
+
         memberJpaRepository.findByEmail(joinRequest.email())
                 .ifPresent(s -> {
-                            throw new MemberIsExistedException(MEMBER_IS_ALREADY_EXIST);
-                        });
+                    throw new MemberIsExistedException(MEMBER_IS_ALREADY_EXIST);
+                });
+
+
         saveMemberAndEncodePassWord(JoinRequest.toEntity(joinRequest));
     }
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        MemberEntity memberEntity = memberJpaRepository.findByEmail(loginRequest.email())
-                .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
-        Long id = memberEntity.getId();
+        Long id = null;
+        String role = null;
+        String nickname = null;
+
+        if (memberJpaRepository.existsByEmail(loginRequest.email())) {
+            MemberEntity memberEntity = memberJpaRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+            id = memberEntity.getId();
+            role = String.valueOf(memberEntity.getAuthority());
+            nickname = memberEntity.getNickname();
+        }
+        if (agentJpaRepository.existsByEmail(loginRequest.email())) {
+            AgentEntity agentEntity = agentJpaRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new MemberNotFoundException(AGENT_NOT_FOUND));
+            id= agentEntity.getId();
+            role= String.valueOf(agentEntity.getAuthority());
+            nickname = agentEntity.getNickname();
+        }
+
         UsernamePasswordAuthenticationToken authenticationToken = loginRequest.toAuthentication();
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         TokenDto tokenDto = jwtTokenProvider.generateTokenDto(authentication);
@@ -63,20 +87,20 @@ public class MemberServiceImpl implements MemberService {
 //        refreshTokenRepository.save(refreshToken);
 
         // 5. 토큰 발급
-        return LoginResponse.of(memberEntity.getNickname(), tokenDto, id);
+        return LoginResponse.of(nickname, tokenDto, id);
     }
 
     @Override
     public MemberResponse findMemberInfoById(Long memberId) {
         return memberJpaRepository.findById(memberId)
-                .map(member -> MemberResponse.of(member.getId(), member.getEmail(), member.getNickname()))
+                .map(member -> MemberResponse.of(member.getId(), member.getEmail(), member.getNickname(), member.getPassword()))
                 .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
     }
 
     @Override
     public MemberResponse findMemberWithId(Long memberId) {
         return memberJpaRepository.findById(memberId)
-                .map(member -> MemberResponse.of(member.getId(), member.getEmail(), member.getNickname()))
+                .map(member -> MemberResponse.of(member.getId(), member.getEmail(), member.getNickname(),member.getPassword()))
                 .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
     }
 
@@ -95,6 +119,7 @@ public class MemberServiceImpl implements MemberService {
         );
         saveMemberAndEncodePassWord(updateMember);
 
-        return MemberResponse.of(updateMember.getId(), updateMember.getEmail(), updateMember.getNickname());
+        return MemberResponse.of(updateMember.getId(), updateMember.getEmail(), updateMember.getNickname(), memberEntity.getPassword());
     }
+
 }
