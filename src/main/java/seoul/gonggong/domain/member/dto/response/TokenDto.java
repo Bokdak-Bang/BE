@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TokenDto {
 //    private Long id;
+    private String role;
     private String grantType;
     private String accessToken;
 //    private String refreshToken;

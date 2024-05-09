@@ -22,13 +22,12 @@ public class AgentAuthApi {
 
     @PostMapping("/sign/agents")
     public ApiResponse<String> signMember(@Valid @RequestBody JoinAgentRequest joinAgentRequest) {
-
         agentService.signAgent(joinAgentRequest);
         return ApiResponse.onSuccess("공인중개사 회원가입이 완료되었습니다.");
     }
 
-    @PostMapping("/login/agents")
-    public ApiResponse<LoginResponse> loginAgent(@Valid @RequestBody LoginRequest loginRequest) {
-        return ApiResponse.onSuccess(agentService.login(loginRequest));
-    }
+//    @PostMapping("/login/agents")
+//    public ApiResponse<LoginResponse> loginAgent(@Valid @RequestBody LoginRequest loginRequest) {
+//        return ApiResponse.onSuccess(agentService.login(loginRequest));
+//    }
 }
