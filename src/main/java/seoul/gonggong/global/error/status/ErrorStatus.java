@@ -20,6 +20,7 @@ public enum ErrorStatus implements BaseErrorCode {
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER_001", "사용자를 찾을 수 없습니다."),
     MEMBER_IS_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "MEMBER_002", "동일한 이메일을 가지고 있는 사용자가 존재합니다."),
     PASSWORD_IS_INVALID(HttpStatus.BAD_REQUEST,"MEMBER_003","비밀번호가 일치하지 않습니다."),
+    EMAIL_IS_EXIST(HttpStatus.BAD_REQUEST,"MEMBER_004","누군가 동일한 이메일로 이미 회원가입을 하였습니다."),
     AGENT_NOT_FOUND(HttpStatus.NOT_FOUND, "AGENT_001", "공인중개사를 찾을 수 없습니다."),
     INVALID_REGION(HttpStatus.FORBIDDEN,"ENUM_001","유효하지 않은 Region입니다."),
 

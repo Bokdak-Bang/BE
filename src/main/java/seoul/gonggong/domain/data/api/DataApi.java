@@ -24,7 +24,7 @@ public class DataApi {
         return ApiResponse.onSuccess(dataService.getAreaListByInputScore(areaStandardRequest));
     }
 
-    @GetMapping("/{areaId}/boards")
+    @GetMapping("/areas/{areaId}/boards")
     public ApiResponse<AreaBoardListResponse> getBoardOfArea(@PathVariable Long areaId) {
         return ApiResponse.onSuccess(dataService.getBoardOfArea(areaId));
     }

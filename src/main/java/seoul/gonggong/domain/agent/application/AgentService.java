@@ -10,7 +10,7 @@ import seoul.gonggong.domain.member.dto.response.MemberResponse;
 
 public interface AgentService {
     void signAgent(JoinAgentRequest joinAgentRequest);
-    LoginResponse login(LoginRequest loginRequest);
+//    LoginResponse login(LoginRequest loginRequest);
 
     MemberResponse updateAgent(MemberRequest memberRequest, Long id);
     MemberResponse findAgentWithId(Long memberId);
