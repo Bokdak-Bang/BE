@@ -31,6 +31,31 @@ public class DataServiceImpl implements DataService {
     private final ScoreUtils scoreUtils;
     private final MeanUtils meanUtils;
 
+    @Override
+    public List<DataBoardResponse> getLikeAreaList() {
+        List<DataBoardResponse> dataBoardResponses = new ArrayList<>();
+        List<MemberAreaEntity> memberAreaEntityList = memberAreaJpaRepository.findAll();
+
+        for (MemberAreaEntity memberArea : memberAreaEntityList) {
+            Area area = areaJpaRepository.findById(memberArea.getArea().getId())
+                    .orElseThrow(() -> new DataException(AREA_NOT_FOUND));
+
+            Map<String, Integer> scoreList = new HashMap<>();
+
+            scoreList.put("education", Integer.valueOf(scoreUtils.getTotalEducationScore(area).intValue()));
+            scoreList.put("life",Integer.valueOf(scoreUtils.getTotalLifeScore(area).intValue()));
+            scoreList.put("nature",Integer.valueOf(scoreUtils.getTotalNatureScore(area).intValue()));
+            scoreList.put("residence",Integer.valueOf(scoreUtils.getTotalResidenceScore(area).intValue()));
+            scoreList.put("security",Integer.valueOf(scoreUtils.getTotalSecurityScore(area).intValue()));
+            scoreList.put("welfare", Integer.valueOf(scoreUtils.getTotalWelfareScore(area).intValue()));
+
+            List<AreaBoardScoreResponse> areaBoardScoreResponses = AreaBoardScoreResponse.of(scoreList);
+
+            dataBoardResponses.add(DataBoardResponse.of(area.getRegion().getArea(), areaBoardScoreResponses));
+        }
+
+        return dataBoardResponses;
+    }
 
     @Override
     public AreaScoreListResponse getAreaListByInputScore(AreaStandardRequest areaStandardRequest) {

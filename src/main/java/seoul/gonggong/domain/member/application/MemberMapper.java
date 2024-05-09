@@ -1,5 +1,6 @@
 package seoul.gonggong.domain.member.application;
 
+import seoul.gonggong.domain.agent.domain.AgentEntity;
 import seoul.gonggong.domain.member.domain.Authority;
 import seoul.gonggong.domain.member.domain.MemberEntity;
 import seoul.gonggong.domain.member.domain.Role;
@@ -31,6 +32,15 @@ public class MemberMapper {
                 username,
                 password,
                 Authority.ROLE_USER
+        );
+    }
+
+    public static AgentEntity memberRequestToAgentEntity(Long id, String email,String nickname, String password) {
+        return AgentEntity.of(id,
+                email,
+                nickname,
+                password,
+                Authority.ROLE_AGENT
         );
     }
 }

@@ -7,8 +7,11 @@ import seoul.gonggong.domain.data.application.DataServiceImpl;
 import seoul.gonggong.domain.data.dto.request.AreaStandardRequest;
 import seoul.gonggong.domain.data.dto.response.AreaBoardListResponse;
 import seoul.gonggong.domain.data.dto.response.AreaScoreListResponse;
+import seoul.gonggong.domain.data.dto.response.DataBoardResponse;
 import seoul.gonggong.global.ApiResponse;
 import seoul.gonggong.global.utils.SecurityUtil;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,9 +35,10 @@ public class DataApi {
         return ApiResponse.onSuccess("성공적으로 저장되었습니다.");
     }
 
-//    @GetMapping("/areas/boards")
-//    public ApiResponse<AreaLikeResponse> getAreaLikeList() {
-//        return ApiResponse.onSuccess(dataService.getLikeAreaList());
-//    }
+
+    @GetMapping("/boards")
+    public ApiResponse<List<DataBoardResponse>> getAreaLikeList() {
+        return ApiResponse.onSuccess(dataService.getLikeAreaList());
+    }
 
 }
