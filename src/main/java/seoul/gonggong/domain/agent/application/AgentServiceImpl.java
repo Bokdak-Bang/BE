@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 import seoul.gonggong.domain.agent.domain.AgentEntity;
 import seoul.gonggong.domain.agent.dto.request.ContactInfoRequest;
 import seoul.gonggong.domain.agent.dto.request.JoinAgentRequest;
+import seoul.gonggong.domain.agent.exception.AgentNotFoundException;
 import seoul.gonggong.domain.agent.repository.AgentJpaRepository;
 import seoul.gonggong.domain.member.domain.MemberEntity;
 import seoul.gonggong.domain.member.dto.request.JoinRequest;
 import seoul.gonggong.domain.member.dto.request.LoginRequest;
+import seoul.gonggong.domain.member.dto.request.MemberRequest;
 import seoul.gonggong.domain.member.dto.response.LoginResponse;
+import seoul.gonggong.domain.member.dto.response.MemberResponse;
 import seoul.gonggong.domain.member.dto.response.TokenDto;
 import seoul.gonggong.domain.member.exception.MemberIsExistedException;
 import seoul.gonggong.domain.member.exception.MemberNotFoundException;
@@ -68,9 +71,32 @@ public class AgentServiceImpl implements AgentService{
 
     }
 
+    @Override
+    public MemberResponse updateAgent(MemberRequest memberRequest, Long id) {
+        AgentEntity agentEntity = agentJpaRepository.findById(id)
+                .orElseThrow(() -> new AgentNotFoundException(AGENT_NOT_FOUND));
+
+        return updateAgentAndEncodePassWord(agentEntity,memberRequest);
+    }
+
+    @Override
+    public MemberResponse findAgentWithId(Long memberId) {
+        return agentJpaRepository.findById(memberId)
+                .map(agent -> MemberResponse.of(agent.getId(), agent.getEmail(), agent.getNickname()))
+                .orElseThrow(() -> new AgentNotFoundException(AGENT_NOT_FOUND));
+    }
+
     public void saveAgentAndEncodePassWord(AgentEntity agentEntity) {
         agentEntity.encodePassword(passwordEncoder);
         agentJpaRepository.save(agentEntity);
+    }
+
+    public MemberResponse updateAgentAndEncodePassWord(AgentEntity agentEntity, MemberRequest memberRequest) {
+        agentEntity.updateNickName(memberRequest.username());
+        agentEntity.updatePassword(memberRequest.password());
+        agentEntity.encodePassword(passwordEncoder);
+        agentJpaRepository.save(agentEntity);
+        return MemberResponse.of(agentEntity.getId(), agentEntity.getEmail(), agentEntity.getNickname());
     }
 
 }

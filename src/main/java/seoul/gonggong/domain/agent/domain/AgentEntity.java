@@ -36,8 +36,25 @@ public class AgentEntity {
         return new AgentEntity(id, email, nickname, password, authority, contactInfo);
     }
 
+    public static AgentEntity of(Long id, String email, String nickname, String password, Authority authority) {
+        return AgentEntity.builder()
+                .id(id)
+                .email(email)
+                .nickname(nickname)
+                .password(password)
+                .authority(authority)
+                .build();
+    }
+
     public void encodePassword(PasswordEncoder passwordEncoder){
         this.password = passwordEncoder.encode(password);
+    }
+
+    public void updateNickName(String nickname) {
+        this.nickname = nickname;
+    }
+    public void updatePassword(String password) {
+        this.password = password;
     }
 }
 
