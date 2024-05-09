@@ -17,7 +17,8 @@ public class CorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
 
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://bokdakbang.store"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://bokdakbang.store",
+                "https://bokdak-bang.vercel.app"));
         configuration.addAllowedHeader("*");
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
 
