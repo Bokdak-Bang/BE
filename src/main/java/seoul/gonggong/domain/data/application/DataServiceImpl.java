@@ -106,6 +106,11 @@ public class DataServiceImpl implements DataService {
         Area area = areaJpaRepository.findById(areaId)
                 .orElseThrow(() -> new DataException(DATA_NOT_FOUND));
 
+        memberAreaJpaRepository.findByMemberAndArea(memberEntity, area)
+                .ifPresent(ma -> {
+                    throw new DataException(DATA_IS_EXIST);
+        });
+
         MemberAreaEntity memberArea = MemberAreaEntity.of(null, memberEntity, area);
         memberAreaJpaRepository.save(memberArea);
     }
