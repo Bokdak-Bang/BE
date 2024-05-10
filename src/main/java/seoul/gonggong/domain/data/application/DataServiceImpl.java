@@ -32,9 +32,9 @@ public class DataServiceImpl implements DataService {
     private final MeanUtils meanUtils;
 
     @Override
-    public List<DataBoardResponse> getLikeAreaList() {
+    public List<DataBoardResponse> getLikeAreaList(Long memberId) {
         List<DataBoardResponse> dataBoardResponses = new ArrayList<>();
-        List<MemberAreaEntity> memberAreaEntityList = memberAreaJpaRepository.findAll();
+        List<MemberAreaEntity> memberAreaEntityList = memberAreaJpaRepository.findByMemberId(memberId);
 
         for (MemberAreaEntity memberArea : memberAreaEntityList) {
             Area area = areaJpaRepository.findById(memberArea.getArea().getId())

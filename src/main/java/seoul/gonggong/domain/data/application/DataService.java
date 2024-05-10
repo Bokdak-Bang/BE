@@ -14,5 +14,5 @@ public interface DataService {
 
     void saveBoardOfArea(Long memberId, Long areaId);
 
-    List<DataBoardResponse> getLikeAreaList();
+    List<DataBoardResponse> getLikeAreaList(Long memberId);
 }
