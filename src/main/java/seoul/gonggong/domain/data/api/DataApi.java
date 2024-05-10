@@ -41,7 +41,7 @@ public class DataApi {
 //        return ApiResponse.onSuccess(dataService.getLikeAreaList());
 //    }
 
-    @GetMapping("/{memberId}/boards")
+    @GetMapping("/boards/{memberId}")
     public ApiResponse<List<DataBoardResponse>> getAreaLikeList(@PathVariable Long memberId) {
         return ApiResponse.onSuccess(dataService.getLikeAreaList(memberId));
     }
