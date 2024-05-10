@@ -35,7 +35,7 @@ public enum ErrorStatus implements BaseErrorCode {
     DATA_IS_WRONG(HttpStatus.BAD_REQUEST,"DATA_001","데이터를 처리하는데 오류가 발생하였습니다."),
     AREA_NOT_FOUND(HttpStatus.NOT_FOUND,"DATA_002","요청하신 지역을 찾지 못하였습니다."),
     DATA_NOT_FOUND(HttpStatus.NOT_FOUND, "DATA_003", "데이터를 찾지 못하였습니다."),
-    DATA_IS_EXIST(HttpStatus.BAD_REQUEST, "DATA_004", "데이터가 이미 존재하여 저장하지 못하였습니다.")
+    DATA_IS_EXIST(HttpStatus.BAD_REQUEST, "DATA_004", "데이터가 이미 존재하여 저장하지 못하였습니다."),
 
     //Auth 관련 에러
     NO_AUTHENTICATION_INFO(HttpStatus.NOT_FOUND, "AUTH_001", "Security Context 에 인증 정보가 없습니다.."),
