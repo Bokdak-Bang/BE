@@ -18,7 +18,7 @@ public class CorsConfig {
         configuration.setAllowCredentials(true);
 
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://bokdakbang.store",
-                "https://bokdak-bang.vercel.app"));
+                "https://bokdak-bang.netlify.app"));
         configuration.addAllowedHeader("*");
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
 
